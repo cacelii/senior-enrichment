@@ -16,7 +16,7 @@ router.get('/:studentId', (req, res, next) => {
 	.catch(next);
 })
 
-router.post('/', (req, res, next) => {
+router.post('/addStudent', (req, res, next) => {
   Student.create(req.body)
   .then(student => res.json(student))
   .catch(next);
@@ -29,11 +29,16 @@ router.put('/:studentid', (req, res, next) => {
   .catch(next);
 });
 
-router.delete('/:studentid', (req, res, next) => {
-  const id = +req.params.studentId;
-  Student.destroy({where: { id }})
+router.delete('/', (req, res, next) => {
+  Student.destroy({truncate: true})
   .then(() => res.sendStatus(204))
   .catch(next);
+});
+
+//is more specific so needs to go on top
+//?
+router.get('/:studentId/:campusId', (req, res, next) => {
+
 });
 
 module.exports = router;

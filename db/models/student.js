@@ -1,7 +1,7 @@
 'use strict'
 const Sequelize = require('sequelize');
 const db = require('../index');
-const {STRING} = Sequelize;
+const {STRING, INTEGER} = Sequelize;
 
 module.exports = db.define('student', {
   name: {
@@ -11,5 +11,8 @@ module.exports = db.define('student', {
   email: {
     type: STRING,
     allowNull: false
+  },
+  campusId: {
+    type: INTEGER
   }
 });

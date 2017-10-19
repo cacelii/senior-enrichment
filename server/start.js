@@ -20,7 +20,7 @@ module.exports = app
   .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html')))
   .use((err, req, res, next) => {
     console.log(err.stack);
-    res.status(err.status || 500).send(err.message);
+    res.status(err.status || 500).send(err.message || 'Internal server error');
   })
   // Send index.html for any other requests.
 

@@ -22,6 +22,14 @@ router.post('/', (req, res, next) => {
   .catch(next);
 });
 
+router.get('/:campusId/:name', (req, res, next) => {
+  const campusId = +req.params.campusId;
+  const name = +req.params.name;
+  Student.findOne({where: { campusId, name }})
+  .then(student => res.json(student))
+  .catch(next);
+});
+
 router.put('/:campusId', (req, res, next) => {
   const campusId = req.params.campusId;
   Campus.findById(campusId)
@@ -36,13 +44,5 @@ router.delete('/:campusId', (req, res, next) => {
   .catch(next);
 });
 
-
-//?
-router.get('/:campusId/students', (req, res, next) => {
-  const campusId = +req.params.campusId;
-  Student.findAll({where: { campusId }})
-  .then(students => res.json(students))
-  .catch(next);
-});
 
 module.exports = router;
