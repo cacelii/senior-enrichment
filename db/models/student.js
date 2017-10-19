@@ -15,4 +15,8 @@ module.exports = db.define('student', {
   campusId: {
     type: INTEGER
   }
+}, {
+  defaultScope: {
+    include: [{ all: true }]
+  }
 });

@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import history from '../../history';
 import { deleteStudent } from '../../reducers/students';
 
 function Students (props) {
@@ -24,8 +23,8 @@ function Students (props) {
             <tr key={student.id}>
               <td>{student.id}</td>
               <td><NavLink to={`/students/${student.id}`} activeClassName="active">{ student.name }</NavLink></td>
-              <td>{ student.campusId }</td>
-              <td><button className="btn btn-default btn-xs" onClick={props.deleteStudent}>x</button></td>
+              <td>{ student.campus ? student.campus.name : null }</td>
+              <td><button className="btn btn-default btn-xs" onClick={() => props.deleteStudent(student.id)}>x</button></td>
               </tr>
           ))
         }
@@ -42,14 +41,7 @@ function mapStateToProps (state) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    deleteStudent: function(event) {
-      event.preventDefault();
-      dispatch(deleteStudent());
-      history.push('/students');
-    }
-  };
-}
+const mapDispatchToProps = ({
+    deleteStudent});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Students))

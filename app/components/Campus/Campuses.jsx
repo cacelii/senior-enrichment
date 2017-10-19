@@ -2,28 +2,31 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { deleteCampus } from '../../reducers/campuses';
 
 const Campuses = (props) => (
   <div className="container-fluid">
     <div className="col-xs-10">
-      <div className="row">
+    <button><NavLink to="/campuses/addCampus" activeClassName="active">Add Campus</NavLink></button>
+    <table className='table'>
+    <thead>
+      <tr>
+        <th>Campuses</th>
+      </tr>
+    </thead>
+    <tbody>
       {
-        props.campuses.map(campus => {
-          return (
-            <div key={campus.id} className="col-xs-4">
-            <NavLink to={`/campuses/${campus.id}`} activeClassName="active">
-                <img src={campus.image} />
-                <div className="caption">
-                <h5>
-                  <span>{campus.name} Campus</span>
-                </h5>
-                </div>
-              </NavLink>
-            </div>
-          )
-        })
+        props.campuses && props.campuses.map(campus => (
+          <tr key={campus.id}>
+            <td>{campus.id}</td>
+            <td><NavLink to={`/campuses/${campus.id}`} activeClassName="active">{ campus.name }</NavLink></td>
+            <td>{ campus.campusId }</td>
+            <td><button className="btn btn-default btn-xs" onClick={() => props.deleteCampus(campus.id)}>x</button></td>
+            </tr>
+        ))
       }
-      </div>
+    </tbody>
+  </table>
     </div>
   </div>
 );
@@ -31,9 +34,11 @@ const Campuses = (props) => (
 function mapStateToProps (state) {
   return {
     campuses: state.campuses,
-    students: state.students,
     singleCampus: state.singleCampus
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Campuses))
+const mapDispatchToProps = ({
+  deleteCampus});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Campuses))

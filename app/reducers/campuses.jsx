@@ -27,6 +27,26 @@ export function fetchCampuses () {
   }
 }
 
+export function postCampus (campus) {
+
+    return function thunk (dispatch) {
+      return axios.post('/api/campuses/addCampus', campus)
+        .then(res => res.data)
+        .then(newCampus => {
+          const action = getCampus(newCampus);
+          dispatch(action);
+        });
+    }
+  }
+
+  export function deleteCampus (id) {
+
+        return function thunk (dispatch) {
+          axios.delete(`/api/campuses/${id}`)
+          .then(() => dispatch(fetchCampuses()));
+        }
+  }
+
 export default function campuses (state = [], action) {
   switch (action.type) {
     case GET_CAMPUSES:

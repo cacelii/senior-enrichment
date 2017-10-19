@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Campuses from './components/Campus/Campuses';
 import SingleCampus from './components/Campus/SingleCampus';
 import SingleCampusStudent from './components/Campus/SingleCampusStudent';
+import NewCampus from './components/Campus/NewCampus';
 import Students from './components/Student/Students';
 import SingleStudent from './components/Student/SingleStudent';
 import NewStudent from './components/Student/NewStudent';
@@ -30,6 +31,7 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/campuses" component={Campuses} />
+            <Route exact path="/campuses/addCampus" component={NewCampus}/>
             <Route exact path="/students" component={Students} />
             <Route exact path="/students/addStudent" component={NewStudent}/>
             <Route exact path="/campuses/:campusId" component={SingleCampus} />

@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
-const REMOVE_STUDENT = 'REMOVE_STUDENT'
 
 
 export function getStudents (students) {
@@ -16,12 +15,6 @@ export function getStudent (student) {
   return {
     type: GET_STUDENT,
     student
-  }
-}
-
-export function removeStudent () {
-  return {
-    type: REMOVE_STUDENT
   }
 }
 
@@ -48,13 +41,13 @@ export function postStudent (student) {
   }
 }
 
-export function deleteStudent () {
+export function deleteStudent (id) {
 
     return function thunk (dispatch) {
-      dispatch(removeStudent())
-      axios.delete('/api/students')
+      axios.delete(`/api/students/${id}`)
+      .then(() => dispatch(fetchStudents()));
     }
-  }
+}
 
 export default function students(state = [], action) {
   switch (action.type) {

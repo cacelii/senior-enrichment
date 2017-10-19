@@ -1,31 +1,40 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { fetchSingleCampus } from '../../reducers/singleCampus';
 
-const SingleCampus = (props) => {
+class SingleCampus extends Component {
 
-  const campusId = +props.match.params.campusId;
-  const studentId = +props.match.params.studentId;
-  const filteredStudents = props.students.filter(student => student.campusId === campusId);
-  console.log(props.singleCampus);
+  componentDidMount() {
+    const campusId = +this.props.match.params.campusId;
+    this.props.fetchSingleCampus(campusId);
+  }
 
-  return (
-      <div className="campus">
-        <div>
-        <h3>{props.singleCampus.name} Campus</h3>
-        <ol>
-        {
-          filteredStudents.map(student => {
-            return (
-              <li key={student.id}><NavLink to={`/campuses/${campusId}/${student.name}`} activeClassName="active">{student.name}</NavLink></li>
-            )
-          })
-        }
-        </ol>
-        </div>
-    </div>
-    )
+  render() {
+    const campusId = +this.props.match.params.campusId;
+    const filteredStudents = this.props.students.filter(student => student.campusId === campusId);
+
+    return (
+        <div className="campus">
+          <div>
+          <h3>{this.props.singleCampus.name} Campus</h3>
+          <img src={this.props.singleCampus.image} />
+          <h4>{this.props.singleCampus.info}</h4>
+          <ol>
+          {
+            filteredStudents.map(student => {
+              return (
+                <li key={student.id}><NavLink to={`/campuses/${campusId}/${student.name}`} activeClassName="active">{student.name}</NavLink></li>
+              )
+            })
+          }
+          </ol>
+          </div>
+      </div>
+      )
+
+  }
   }
 
 function mapStateToProps (state) {
@@ -35,4 +44,6 @@ function mapStateToProps (state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(SingleCampus))
+const mapDispatchToProps = ({fetchSingleCampus});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleCampus))

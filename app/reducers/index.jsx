@@ -3,6 +3,7 @@ import campuses from './campuses';
 import students from './students';
 import singleCampus from './singleCampus';
 import newStudent from './newStudent';
+import newCampus from './newCampus';
 
 // const initialState = {}
 
@@ -17,7 +18,8 @@ const rootReducer = combineReducers(
     campuses,
     students,
     singleCampus,
-    newStudent
+    newStudent,
+    newCampus
   }
 )
 

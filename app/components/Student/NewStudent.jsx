@@ -12,19 +12,19 @@ function NewStudent (props) {
       <div className="form-group">
         <label htmlFor="name" className="col-xs-2">Name</label>
         <div className="col-xs-10">
-        <input value={props.newStudent} onChange={props.handleChange} className="form-control" type="text" name="studentName" placeholder="Enter student name" />
+        <input value={props.newStudent.name} onChange={props.handleChange} className="form-control" type="text" name="studentName" placeholder="Enter student name" />
         </div>
       </div>
       <div className="form-group">
       <label htmlFor="email" className="col-xs-2">Email</label>
       <div className="col-xs-10">
-      <input value={props.newStudent} onChange={props.handleChange} className="form-control" type="text" name="studentEmail" placeholder="Enter email" />
+      <input value={props.newStudent.email} onChange={props.handleChange} className="form-control" type="text" name="studentEmail" placeholder="Enter email" />
       </div>
     </div>
       <div className="form-group">
       <label htmlFor="campus" className="col-xs-2 control-label">Select Campus</label>
       <div className="col-xs-10">
-        <select className="form-control" name="campus" onChange={props.handleChange}>
+        <select value={props.newStudent.campus ? props.newStudent.campus.name : null } className="form-control" name="campus" onChange={props.handleChange}>
         {
           props.campuses.map(campus => {
             return (

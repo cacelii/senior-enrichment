@@ -1,16 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import history from '../history';
 
 /* -----------------    COMPONENT     ------------------ */
 
-class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+function Navbar () {
 
-  render() {
     return (
         <div className="container">
             <ul className="nav navbar-nav">
@@ -26,15 +21,9 @@ class Navbar extends React.Component {
             </ul>
           </div>
     );
-  }
 }
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapProps = null;
-
-const mapDispatch = dispatch => ({
-});
-
-export default withRouter(connect(mapProps, mapDispatch)(Navbar));
+export default withRouter(connect()(Navbar));
 

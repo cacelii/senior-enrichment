@@ -1,18 +1,41 @@
 import React from 'react';
-import Campuses from './Campus/Campuses';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
-const Home = () => (
+const Home = (props) => (
   <div className="home">
     <div className="container-fluid">
       <div className="col-xs-10">
       <h2>Javascript Academy</h2>
       <h1><small>where you can learn all the javascript your heart desires</small></h1>
       <div className="row">
-    <Campuses />
+      {
+        props.campuses.map(campus => {
+          return (
+            <div key={campus.id} className="col-xs-6">
+            <NavLink to={`/campuses/${campus.id}`} activeClassName="active">
+                <img src={campus.image} />
+                <div className="caption">
+                <h5>
+                  <span>{campus.name} Campus</span>
+                </h5>
+                </div>
+              </NavLink>
+            </div>
+          )
+        })
+      }
       </div>
       </div>
     </div>
   </div>
 );
 
-export default Home;
+function mapStateToProps (state) {
+  return {
+    campuses: state.campuses
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(Home));

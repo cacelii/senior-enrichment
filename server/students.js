@@ -29,8 +29,10 @@ router.put('/:studentid', (req, res, next) => {
   .catch(next);
 });
 
-router.delete('/', (req, res, next) => {
-  Student.destroy({truncate: true})
+router.delete('/:studentId', (req, res, next) => {
+  const id = +req.params.studentId;
+  console.log(id)
+  Student.destroy({where: {id}})
   .then(() => res.sendStatus(204))
   .catch(next);
 });
