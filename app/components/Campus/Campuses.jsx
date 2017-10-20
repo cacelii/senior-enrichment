@@ -8,6 +8,7 @@ const Campuses = (props) => (
   <div className="container-fluid">
     <div className="col-xs-10">
     <button><NavLink to="/campuses/addCampus" activeClassName="active">Add Campus</NavLink></button>
+    <button><NavLink to="/campuses/editCampus" activeClassName="active">Edit Campus</NavLink></button>
     <table className='table'>
     <thead>
       <tr>

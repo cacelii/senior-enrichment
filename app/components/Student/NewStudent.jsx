@@ -8,7 +8,7 @@ import history from '../../history';
 function NewStudent (props) {
   return (
     <form onSubmit={props.handleSubmit}>
-    <h3>Add Person</h3>
+    <h3>Add/Edit Student</h3>
       <div className="form-group">
         <label htmlFor="name" className="col-xs-2">Name</label>
         <div className="col-xs-10">

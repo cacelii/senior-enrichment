@@ -37,15 +37,28 @@ export function postCampus (campus) {
           dispatch(action);
         });
     }
+}
+
+export function editCampus (campus) {
+
+      return function thunk (dispatch) {
+        return axios.put('/api/campuses/:campusId', campus)
+          .then(res => res.data)
+          .then(updatedCampus => {
+            const action = getCampus(updatedCampus);
+            dispatch(action);
+          });
+      }
   }
 
-  export function deleteCampus (id) {
+
+export function deleteCampus (id) {
 
         return function thunk (dispatch) {
           axios.delete(`/api/campuses/${id}`)
           .then(() => dispatch(fetchCampuses()));
         }
-  }
+}
 
 export default function campuses (state = [], action) {
   switch (action.type) {

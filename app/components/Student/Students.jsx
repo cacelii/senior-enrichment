@@ -9,6 +9,7 @@ function Students (props) {
     return (
       <div>
       <button><NavLink to="/students/addStudent" activeClassName="active">Add Student</NavLink></button>
+      <button><NavLink to="/students/editStudent" activeClassName="active">Edit Student</NavLink></button>
       <table className='table'>
       <thead>
         <tr>

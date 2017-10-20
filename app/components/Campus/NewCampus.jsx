@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { postCampus } from '../../reducers/campuses';
-import { addCampus } from '../../reducers/newCampus';
+import { addCampus, editCampus } from '../../reducers/newCampus';
 import history from '../../history';
 
 function NewCampus (props) {
   return (
     <form onSubmit={props.handleSubmit}>
-    <h3>Add Campus</h3>
+    <h3>Add/Edit Campus</h3>
       <div className="form-group">
         <label htmlFor="name" className="col-xs-2">Name</label>
         <div className="col-xs-10">
@@ -43,6 +43,11 @@ function mapDispatchToProps (dispatch) {
       event.preventDefault();
       dispatch(postCampus({ name: event.target.campusName.value, info: event.target.campusInfo.value}));
       dispatch(addCampus(''));
+      history.push('/campuses');
+    },
+    handleEdit: function(event) {
+      event.preventDefault();
+      dispatch(editCampus({ name: event.target.campusName.value, info: event.target.campusInfo.value}));
       history.push('/campuses');
     }
   };

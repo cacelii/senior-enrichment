@@ -7,7 +7,7 @@ const Home = (props) => (
   <div className="home">
     <div className="container-fluid">
       <div className="col-xs-10">
-      <h2>Javascript Academy</h2>
+      <h2><strong>Javascript Academy</strong></h2>
       <h1><small>where you can learn all the javascript your heart desires</small></h1>
       <div className="row">
       {

@@ -1,27 +1,36 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { fetchSingleStudent } from '../../reducers/singleStudent';
 
-const SingleStudent = (props) => {
+class SingleStudent extends Component {
 
-  const studentId = +props.match.params.studentId;
-
-  return (
-      <div className="student">
-        <div>
-        <h3>Name</h3>
-        <h5>Campus</h5>
-        <p>Info</p>
-        </div>
-    </div>
-    )
+  componentDidMount() {
+    const studentId = +this.props.match.params.studentId;
+    this.props.fetchSingleStudent(studentId);
   }
+
+  render() {
+    const {name, email, campus} = this.props.singleStudent;
+    return (
+        <div className="student">
+          <div>
+          <h2><strong>{name}</strong></h2>
+          <h3>{ campus ? campus.name + ' Campus' : null }</h3>
+          <h4>{email}</h4>
+          </div>
+      </div>
+      )
+  }
+}
 
 function mapStateToProps (state) {
   return {
     students: state.students,
-    singleCampus: state.singleCampus
+    singleStudent: state.singleStudent
   }
 }
 
-export default withRouter(connect(mapStateToProps)(SingleStudent))
+const mapDispatchToProps = ({fetchSingleStudent});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleStudent))

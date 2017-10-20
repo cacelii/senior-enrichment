@@ -14,18 +14,19 @@ class SingleCampus extends Component {
   render() {
     const campusId = +this.props.match.params.campusId;
     const filteredStudents = this.props.students.filter(student => student.campusId === campusId);
+    const {name, image, info} = this.props.singleCampus;
 
     return (
         <div className="campus">
           <div>
-          <h3>{this.props.singleCampus.name} Campus</h3>
-          <img src={this.props.singleCampus.image} />
-          <h4>{this.props.singleCampus.info}</h4>
+          <h2><strong>{name} Campus</strong></h2>
+          <img src={image} />
+          <h4>{info}</h4>
           <ol>
           {
             filteredStudents.map(student => {
               return (
-                <li key={student.id}><NavLink to={`/campuses/${campusId}/${student.name}`} activeClassName="active">{student.name}</NavLink></li>
+                <li key={student.id}><NavLink to={`/campuses/${campusId}/${student.id}`} activeClassName="active">{student.name}</NavLink></li>
               )
             })
           }
